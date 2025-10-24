@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="no">
 <head>
   <meta charset="UTF-8" />
   <title>Padel Mexicano Tournament</title>
@@ -10,16 +10,16 @@
 
   <div class="w-full max-w-5xl space-y-6">
 
+    <!-- HEADER -->
     <header class="flex flex-col gap-2">
-      <h1 class="text-3xl font-bold text-white">
-        Padel Mexicano Manager
-      </h1>
+      <h1 class="text-3xl font-bold text-white">Padel Mexicano Manager</h1>
       <p class="text-slate-400 text-sm leading-snug">
-        Flytende lag. Poeng du tar i kampen går på deg.<br/>
-        Ingen skal stå over to ganger før alle andre har stått over én gang.
+        Flytende lag, individuelle poeng, rettferdig hvile.  
+        Nettleseren husker alt – selv om du lukker siden.
       </p>
     </header>
 
+    <!-- SPILLERE -->
     <section class="bg-slate-800/60 rounded-2xl shadow-xl p-4 md:p-6">
       <h2 class="text-xl font-semibold mb-3 flex items-center gap-2">
         <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -27,33 +27,31 @@
       </h2>
 
       <div class="flex flex-col md:flex-row gap-3 mb-4">
-        <input
-          id="playerNameInput"
-          class="flex-1 rounded-xl bg-slate-900 border border-slate-700 px-4 py-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-          placeholder="Spillernavn (trykk +)"
-        />
-        <button
-          id="addPlayerBtn"
-          class="rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold px-4 py-2 transition shadow-lg shadow-emerald-500/20"
-        >
+        <input id="playerNameInput"
+          class="flex-1 rounded-xl bg-slate-900 border border-slate-700 px-4 py-2 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+          placeholder="Skriv navn" />
+        <button id="addPlayerBtn"
+          class="rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-semibold px-4 py-2 shadow-lg shadow-emerald-500/20">
           + Legg til spiller
         </button>
       </div>
 
-      <div id="playersList" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 text-sm">
-      </div>
+      <p id="playerEditHint" class="text-[11px] text-slate-500 mb-3">
+        Du kan fjerne spillere før første runde starter.
+      </p>
+
+      <div id="playersList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-sm"></div>
     </section>
 
+    <!-- RUNDE -->
     <section class="bg-slate-800/60 rounded-2xl shadow-xl p-4 md:p-6">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
         <h2 class="text-xl font-semibold flex items-center gap-2">
           <span class="inline-block w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
           Neste runde
         </h2>
-        <button
-          id="generateRoundBtn"
-          class="rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-900 font-semibold px-4 py-2 transition shadow-lg shadow-sky-500/20 disabled:opacity-30 disabled:cursor-not-allowed"
-        >
+        <button id="generateRoundBtn"
+          class="rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-900 font-semibold px-4 py-2 shadow-lg shadow-sky-500/20">
           Lag runde
         </button>
       </div>
@@ -62,37 +60,29 @@
         <label class="block text-[11px] text-slate-400 uppercase tracking-wide mb-1">
           Poeng per kamp totalt
         </label>
-        <input
-          id="pointsPerMatchInput"
-          type="number"
-          min="1"
+        <input id="pointsPerMatchInput" type="number" min="1"
           class="w-28 rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-400 text-center"
-          value="24"
-        />
-        <p class="text-[11px] text-slate-500 mt-1 leading-snug">
-          Hvis total er 16 og lag A får 9 poeng, får lag B automatisk 7.
+          value="24" />
+        <p class="text-[11px] text-slate-500 mt-1">
+          Hvis total er 16 og lag A får 9, får lag B automatisk 7.
         </p>
       </div>
 
       <div id="roundInfo" class="space-y-4 text-sm"></div>
 
       <div class="mt-6 flex justify-end">
-        <button
-          id="submitScoresBtn"
-          class="rounded-xl bg-purple-500 hover:bg-purple-400 text-slate-900 font-semibold px-4 py-2 transition shadow-lg shadow-purple-500/20 disabled:opacity-30 disabled:cursor-not-allowed"
-          disabled
-        >
-          Registrer poeng
-        </button>
+        <button id="submitScoresBtn"
+          class="rounded-xl bg-purple-500 hover:bg-purple-400 text-slate-900 font-semibold px-4 py-2 shadow-lg shadow-purple-500/20 disabled:opacity-30"
+          disabled>Registrer poeng</button>
       </div>
     </section>
 
+    <!-- LEADERBOARD -->
     <section class="bg-slate-800/60 rounded-2xl shadow-xl p-4 md:p-6">
       <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
         <span class="inline-block w-2 h-2 rounded-full bg-yellow-400 animate-pulse"></span>
         Leaderboard
       </h2>
-
       <div class="overflow-x-auto">
         <table class="min-w-full text-left text-sm text-slate-200">
           <thead class="text-slate-400 text-xs uppercase border-b border-slate-700/60">
@@ -103,402 +93,184 @@
               <th class="py-2 pr-4">Hvilt</th>
             </tr>
           </thead>
-          <tbody id="leaderboardBody" class="divide-y divide-slate-700/60">
-          </tbody>
+          <tbody id="leaderboardBody" class="divide-y divide-slate-700/60"></tbody>
         </table>
       </div>
     </section>
 
-    <footer class="text-center text-[11px] text-slate-500 pt-6 pb-10">
-      Du skriver bare poengene til første laget i hver kamp.
-      Det andre laget får automatisk resten av totalen.
-      Ingen får hvile to ganger før alle andre har hvilt én gang.
-    </footer>
+    <!-- RESET KNAPP -->
+    <div class="flex justify-center mt-6">
+      <button id="resetBtn"
+        class="bg-red-700 hover:bg-red-600 text-white font-bold px-5 py-3 rounded-xl shadow-lg shadow-red-800/30 border border-red-900 text-center">
+        🚨 ADVARSEL: Dette er en RESET-knapp! 🚨<br/>
+        <span class="text-xs font-normal text-red-200">Ikke trykk bare fordi du taper!</span>
+      </button>
+    </div>
 
+    <footer class="text-center text-[11px] text-slate-500 pt-6 pb-10">
+      Nettleseren husker spillere, poeng og runder. Du kan lukke siden og fortsette senere.
+    </footer>
   </div>
 
   <script>
-    // -------------------------
-    // State
-    // -------------------------
-    // players: {id, name, points, restCount}
+    // ---------- STATE ----------
     let players = [];
-    let currentRound = null; // { matches: [...], bench: [playerId,...] }
     let roundCounter = 0;
+    let currentRound = null;
     let matchHistory = [];
     let nextPlayerId = 1;
     let pointsPerMatch = 24;
 
-    // -------------------------
-    // Helpers
-    // -------------------------
-    function shuffle(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
-        }
+    // ---------- STORAGE ----------
+    function saveState() {
+      localStorage.setItem("mexicanoState", JSON.stringify({
+        players, roundCounter, currentRound, matchHistory, nextPlayerId, pointsPerMatch
+      }));
     }
-
-    function getLeaderboard() {
-        const copy = players.slice();
-        // randomize ties
-        shuffle(copy);
-        // sort by points desc
-        copy.sort((a, b) => b.points - a.points);
-        return copy;
+    function loadState() {
+      const s = localStorage.getItem("mexicanoState");
+      if (!s) return;
+      try {
+        const o = JSON.parse(s);
+        players = o.players || [];
+        roundCounter = o.roundCounter || 0;
+        currentRound = o.currentRound || null;
+        matchHistory = o.matchHistory || [];
+        nextPlayerId = o.nextPlayerId || 1;
+        pointsPerMatch = o.pointsPerMatch || 24;
+      } catch { }
     }
+    loadState();
 
-    function chunk4(list) {
-        const result = [];
-        for (let i = 0; i < list.length; i += 4) {
-            result.push(list.slice(i, i + 4));
-        }
-        return result;
-    }
+    // ---------- HELPERS ----------
+    const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } };
+    const getLeaderboard = () => { const c = players.slice(); shuffle(c); c.sort((a, b) => b.points - a.points); return c; };
+    const chunk4 = a => a.map((_, i) => i % 4 === 0 ? a.slice(i, i + 4) : null).filter(Boolean);
+    const idToPlayer = id => players.find(p => p.id === id);
+    const namesOfTeam = t => t.map(id => idToPlayer(id)?.name || "?").join(" & ");
+    const pickBenchFair = (board, n) => { if (n <= 0) return []; const min = Math.min(...board.map(p => p.restCount || 0)); const elig = board.filter(p => p.restCount === min); shuffle(elig); return elig.slice(0, n); };
+    const started = () => roundCounter > 0 || matchHistory.length > 0 || currentRound !== null;
 
-    function idToPlayer(id) {
-        return players.find(p => p.id === id);
-    }
-
-    function namesOfTeam(teamIds) {
-        return teamIds.map(id => idToPlayer(id)?.name || "???").join(" & ");
-    }
-
-    function pickBenchPlayersFair(board, howMany) {
-        // board = leaderboard best->worst (array of player OBJs)
-        // Rule: choose from players with the LOWEST restCount
-        if (howMany <= 0) return [];
-        const minRest = Math.min(...board.map(p => p.restCount || 0));
-        const eligible = board.filter(p => p.restCount === minRest);
-        shuffle(eligible);
-        return eligible.slice(0, howMany);
-    }
-
-    // -------------------------
-    // Round creation logic
-    // -------------------------
+    // ---------- CREATE ROUND ----------
     function createRound() {
-        if (players.length < 2) {
-            alert("Du må ha minst 2 spillere.");
-            return;
-        }
-
-        // hent poeng per kamp
-        const ppmEl = document.getElementById("pointsPerMatchInput");
-        const parsed = parseInt(ppmEl.value, 10);
-        if (!isNaN(parsed) && parsed > 0) {
-            pointsPerMatch = parsed;
-        } else {
-            alert("Poeng per kamp må være et tall > 0.");
-            return;
-        }
-
-        const board = getLeaderboard(); // best -> worst
-        const n = board.length;
-
-        let bench = [];
-        let activePlayers = [];
-        let singles = null;
-        let matches = [];
-
-        if (n % 4 === 0) {
-            // alle spiller double
-            activePlayers = board.slice();
-
-        } else if (n % 4 === 1) {
-            // én hviler, men fair
-            bench = pickBenchPlayersFair(board, 1);
-            // øk restCount
-            bench.forEach(b => { b.restCount = (b.restCount || 0) + 1; });
-
-            activePlayers = board.filter(p => !bench.includes(p));
-
-        } else if (n % 4 === 2) {
-            // ingen hviler.
-            // nederste to (dårligst score totalt) spiller single
-            const worstTwo = board.slice(-2);
-            const rest_after_singles = board.slice(0, board.length - 2);
-
-            singles = {
-                courtName: "",
-                teamA: [worstTwo[0].id],
-                teamB: [worstTwo[1].id],
-                singles: true,
-                scoreA: null,
-                scoreB: null
-            };
-
-            activePlayers = rest_after_singles;
-
-        } else {
-            // n % 4 === 3
-            // én hviler fair
-            bench = pickBenchPlayersFair(board, 1);
-            bench.forEach(b => { b.restCount = (b.restCount || 0) + 1; });
-
-            let remaining = board.filter(p => !bench.includes(p));
-
-            // nederste to av remaining spiller single
-            const worstTwo = remaining.slice(-2);
-            const rest_after_singles = remaining.slice(0, remaining.length - 2);
-
-            singles = {
-                courtName: "",
-                teamA: [worstTwo[0].id],
-                teamB: [worstTwo[1].id],
-                singles: true,
-                scoreA: null,
-                scoreB: null
-            };
-
-            activePlayers = rest_after_singles;
-        }
-
-        // lag doubles courts i grupper på 4
-        const pools = chunk4(activePlayers);
-        let courtIdx = 1;
-        pools.forEach(block => {
-            if (block.length === 4) {
-                const [p1, p2, p3, p4] = block;
-                matches.push({
-                    courtName: `Court ${courtIdx}`,
-                    teamA: [p1.id, p3.id],
-                    teamB: [p2.id, p4.id],
-                    singles: false,
-                    scoreA: null,
-                    scoreB: null
-                });
-                courtIdx += 1;
-            }
-        });
-
-        // legg til singlekamp nederst hvis vi har en
-        if (singles) {
-            singles.courtName = `Court ${courtIdx} (Singles)`;
-            matches.push(singles);
-        }
-
-        roundCounter += 1;
-        currentRound = {
-            matches: matches,
-            bench: bench.map(p => p.id)
-        };
-
-        renderRoundInfo();
-        renderLeaderboard();
-        renderPlayersList();
-        document.getElementById("submitScoresBtn").disabled = false;
+      if (players.length < 2) return alert("Minst 2 spillere");
+      const val = parseInt(document.getElementById("pointsPerMatchInput").value);
+      if (!isNaN(val) && val > 0) pointsPerMatch = val;
+      const board = getLeaderboard(), n = board.length;
+      let bench = [], act = [], singles = null, matches = [];
+      if (n % 4 === 0) act = board;
+      else if (n % 4 === 1) { bench = pickBenchFair(board, 1); bench.forEach(b => b.restCount++); act = board.filter(p => !bench.includes(p)); }
+      else if (n % 4 === 2) { const w = board.slice(-2); singles = { courtName: "", teamA: [w[0].id], teamB: [w[1].id], singles: true }; act = board.slice(0, -2); }
+      else { bench = pickBenchFair(board, 1); bench.forEach(b => b.restCount++); const rem = board.filter(p => !bench.includes(p)); const w = rem.slice(-2); singles = { courtName: "", teamA: [w[0].id], teamB: [w[1].id], singles: true }; act = rem.slice(0, -2); }
+      const pools = chunk4(act); let i = 1;
+      pools.forEach(b => { if (b.length === 4) { const [p1, p2, p3, p4] = b; matches.push({ courtName: `Court ${i}`, teamA: [p1.id, p3.id], teamB: [p2.id, p4.id], singles: false }); i++; } });
+      if (singles) { singles.courtName = `Court ${i} (Singles)`; matches.push(singles); }
+      roundCounter++; currentRound = { matches, bench: bench.map(p => p.id) }; saveState(); renderAll();
     }
 
-    // -------------------------
-    // Submit scores
-    // -------------------------
+    // ---------- SUBMIT SCORES ----------
     function submitScores() {
-        if (!currentRound) return;
-
-        const { matches } = currentRound;
-
-        matches.forEach((m, idx) => {
-            const aEl = document.getElementById(`scoreA-${idx}`);
-            let aVal = parseInt(aEl.value, 10);
-            if (isNaN(aVal) || aVal < 0) aVal = 0;
-            if (aVal > pointsPerMatch) aVal = pointsPerMatch;
-
-            const bVal = pointsPerMatch - aVal;
-
-            m.scoreA = aVal;
-            m.scoreB = bVal;
-
-            // legg poeng til spillerne
-            m.teamA.forEach(pid => {
-                const pl = idToPlayer(pid);
-                if (pl) {
-                    pl.points += aVal;
-                }
-            });
-            m.teamB.forEach(pid => {
-                const pl = idToPlayer(pid);
-                if (pl) {
-                    pl.points += bVal;
-                }
-            });
-        });
-
-        matchHistory.push(currentRound);
-        currentRound = null;
-
-        document.getElementById("submitScoresBtn").disabled = true;
-
-        const roundInfo = document.getElementById("roundInfo");
-        roundInfo.innerHTML = `
-          <div class="text-slate-400 text-sm italic">
-            Runde registrert. Trykk "Lag runde" for neste runde.
-          </div>
-        `;
-
-        renderLeaderboard();
-        renderPlayersList();
+      if (!currentRound) return;
+      const { matches } = currentRound;
+      matches.forEach((m, idx) => {
+        const val = parseInt(document.getElementById(`scoreA-${idx}`).value);
+        const a = Math.max(0, Math.min(isNaN(val) ? 0 : val, pointsPerMatch));
+        const b = pointsPerMatch - a;
+        m.scoreA = a; m.scoreB = b;
+        m.teamA.forEach(id => idToPlayer(id).points += a);
+        m.teamB.forEach(id => idToPlayer(id).points += b);
+      });
+      matchHistory.push(currentRound); currentRound = null; saveState(); renderAll();
     }
 
-    // -------------------------
-    // Rendering
-    // -------------------------
-    function renderPlayersList() {
-        const container = document.getElementById("playersList");
-        container.innerHTML = "";
-
-        players
-          .slice()
-          .sort((a, b) => b.points - a.points)
-          .forEach(p => {
-              const div = document.createElement("div");
-              div.className =
-                "bg-slate-900/70 border border-slate-700 rounded-xl px-3 py-2 flex flex-col shadow";
-              div.innerHTML = `
-                <span class="text-slate-100 font-semibold">${p.name}</span>
-                <span class="text-[11px] text-slate-400">${p.points} pts</span>
-                <span class="text-[10px] text-slate-600">Hvilt: ${p.restCount || 0}x</span>
-              `;
-              container.appendChild(div);
-          });
-    }
-
-    function renderLeaderboard() {
-        const body = document.getElementById("leaderboardBody");
-        body.innerHTML = "";
-
-        const board = players
-          .slice()
-          .sort((a, b) => b.points - a.points);
-
-        board.forEach((p, idx) => {
-            const tr = document.createElement("tr");
-            tr.innerHTML = `
-              <td class="py-2 pr-4 text-slate-300">${idx + 1}</td>
-              <td class="py-2 pr-4 text-slate-100 font-semibold">${p.name}</td>
-              <td class="py-2 pr-4 text-slate-100">${p.points}</td>
-              <td class="py-2 pr-4 text-slate-400 text-xs">${p.restCount || 0}x</td>
-            `;
-            body.appendChild(tr);
-        });
-    }
-
-    function renderRoundInfo() {
-        const roundInfo = document.getElementById("roundInfo");
-        roundInfo.innerHTML = "";
-
-        if (!currentRound) {
-            roundInfo.innerHTML = `<div class="text-slate-400 text-sm italic">
-              Ingen aktiv runde ennå.
-            </div>`;
-            return;
-        }
-
-        const { matches, bench } = currentRound;
-
-        // hvem sitter over
-        const benchNames = bench.map(id => idToPlayer(id)?.name || "???").join(", ");
-        const benchCard = document.createElement("div");
-        benchCard.className = "bg-slate-900/60 rounded-xl border border-slate-700 p-4 shadow";
-        benchCard.innerHTML = `
-          <div class="text-slate-400 text-xs uppercase tracking-wide mb-1">Sitter over</div>
-          <div class="text-slate-100 font-semibold">${benchNames || "Ingen"}</div>
-        `;
-        roundInfo.appendChild(benchCard);
-
-        // kampkort
-        matches.forEach((m, idx) => {
-            const card = document.createElement("div");
-            card.className =
-              "bg-slate-900/60 rounded-xl border border-slate-700 p-4 shadow space-y-3";
-
-            const teamALabel = namesOfTeam(m.teamA);
-            const teamBLabel = namesOfTeam(m.teamB);
-
-            card.innerHTML = `
-              <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1">
-                <div class="flex flex-col">
-                  <div class="text-slate-400 text-[11px] uppercase tracking-wide">
-                    ${m.courtName}
-                  </div>
-                  <div class="text-slate-100 font-semibold text-base">
-                    ${teamALabel}
-                    <span class="text-slate-500 font-normal">vs</span>
-                    ${teamBLabel}
-                  </div>
-                </div>
-                <div class="text-[11px] font-mono text-slate-500">
-                  ${m.singles ? "SINGLES" : "DOUBLES"}
-                </div>
-              </div>
-
-              <div class="flex flex-col gap-2 text-sm">
-                <div class="flex flex-col">
-                  <label class="text-[11px] text-slate-400 mb-1">
-                    Poeng ${teamALabel} (0-${pointsPerMatch})
-                  </label>
-                  <input
-                    id="scoreA-${idx}"
-                    type="number"
-                    min="0"
-                    max="${pointsPerMatch}"
-                    class="w-24 rounded-lg bg-slate-800 border border-slate-700 px-2 py-1 text-slate-100 focus:outline-none focus:ring-2 focus:ring-purple-400 text-center"
-                    placeholder="9"
-                  />
-                </div>
-
-                <div class="flex items-center gap-2 text-[11px] text-slate-400">
-                  <span class="text-slate-500">→</span>
-                  <span>${teamBLabel} får</span>
-                  <span class="text-slate-200 font-semibold" id="autoB-${idx}">?</span>
-                  <span>poeng (resten av ${pointsPerMatch})</span>
-                </div>
-              </div>
-            `;
-
-            roundInfo.appendChild(card);
-        });
-
-        // live auto-visning av andre lag sin score
-        matches.forEach((m, idx) => {
-            const aInput = document.getElementById(`scoreA-${idx}`);
-            const bBox = document.getElementById(`autoB-${idx}`);
-            aInput.addEventListener("input", () => {
-                let aVal = parseInt(aInput.value, 10);
-                if (isNaN(aVal) || aVal < 0) aVal = 0;
-                if (aVal > pointsPerMatch) aVal = pointsPerMatch;
-                const bVal = pointsPerMatch - aVal;
-                bBox.textContent = bVal;
-            });
-        });
-    }
-
-    // -------------------------
-    // Add player / buttons
-    // -------------------------
+    // ---------- ADD / REMOVE PLAYERS ----------
     function addPlayer() {
-        const input = document.getElementById("playerNameInput");
-        const name = input.value.trim();
-        if (!name) return;
-        players.push({
-            id: nextPlayerId++,
-            name: name,
-            points: 0,
-            restCount: 0
-        });
-        input.value = "";
-        renderPlayersList();
-        renderLeaderboard();
+      const input = document.getElementById("playerNameInput");
+      const name = input.value.trim(); if (!name) return;
+      if (started()) return alert("Du kan ikke legge til etter start.");
+      players.push({ id: nextPlayerId++, name, points: 0, restCount: 0 });
+      input.value = ""; saveState(); renderAll();
+    }
+    function removePlayer(id) {
+      if (started()) return alert("Du kan ikke fjerne etter start.");
+      players = players.filter(p => p.id !== id);
+      saveState(); renderAll();
     }
 
-    document.getElementById("addPlayerBtn").addEventListener("click", addPlayer);
-    document.getElementById("generateRoundBtn").addEventListener("click", createRound);
-    document.getElementById("submitScoresBtn").addEventListener("click", submitScores);
+    // ---------- RENDER ----------
+    function renderPlayers() {
+      const c = document.getElementById("playersList");
+      const hint = document.getElementById("playerEditHint");
+      const input = document.getElementById("playerNameInput");
+      const btn = document.getElementById("addPlayerBtn");
+      c.innerHTML = ""; const lock = started();
+      hint.textContent = lock ? "Turneringen er i gang – spillerlisten er låst." : "Du kan fjerne spillere før start.";
+      input.disabled = lock; btn.disabled = lock;
+      players.forEach(p => {
+        const d = document.createElement("div");
+        d.className = "bg-slate-900/70 border border-slate-700 rounded-xl px-3 py-2 flex justify-between items-center";
+        d.innerHTML = `<div><div class="font-semibold">${p.name}</div><div class="text-xs text-slate-400">${p.points} pts • Hvilt ${p.restCount}</div></div>`;
+        const r = document.createElement("button");
+        r.textContent = "🗑 Fjern";
+        r.className = "text-xs bg-red-900/30 hover:bg-red-900/60 border border-red-800/50 rounded px-2 py-1";
+        r.disabled = lock; r.onclick = () => removePlayer(p.id);
+        d.appendChild(r); c.appendChild(d);
+      });
+    }
+    function renderBoard() {
+      const b = document.getElementById("leaderboardBody"); b.innerHTML = "";
+      getLeaderboard().forEach((p, i) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td class='py-2 pr-4 text-slate-300'>${i + 1}</td>
+          <td class='py-2 pr-4'>${p.name}</td>
+          <td class='py-2 pr-4'>${p.points}</td>
+          <td class='py-2 pr-4 text-xs text-slate-400'>${p.restCount}</td>`;
+        b.appendChild(tr);
+      });
+    }
+    function renderRound() {
+      const cont = document.getElementById("roundInfo");
+      const sub = document.getElementById("submitScoresBtn");
+      cont.innerHTML = "";
+      if (!currentRound) { cont.innerHTML = `<div class='text-slate-400 italic'>Ingen aktiv runde.</div>`; sub.disabled = true; return; }
+      const { matches, bench } = currentRound;
+      const benchNames = bench.map(id => idToPlayer(id)?.name).join(", ");
+      cont.innerHTML += `<div class='bg-slate-900/60 p-3 rounded-xl border border-slate-700 mb-3'><b>Sitter over:</b> ${benchNames || "Ingen"}</div>`;
+      matches.forEach((m, i) => {
+        const teamA = namesOfTeam(m.teamA), teamB = namesOfTeam(m.teamB);
+        cont.innerHTML += `<div class='bg-slate-900/60 border border-slate-700 p-3 rounded-xl mb-3'>
+          <div class='font-semibold mb-1'>${m.courtName}</div>
+          <div class='mb-2'>${teamA} <span class='text-slate-500'>vs</span> ${teamB}</div>
+          <label class='text-xs text-slate-400'>Poeng ${teamA} (0-${pointsPerMatch})</label>
+          <input id='scoreA-${i}' type='number' min='0' max='${pointsPerMatch}' class='bg-slate-800 border border-slate-700 rounded px-2 py-1 w-20 text-center text-slate-100'/>
+          <div class='text-xs text-slate-400 mt-1'>→ ${teamB} får <span id='autoB-${i}'>?</span> poeng</div>
+        </div>`;
+      });
+      matches.forEach((m, i) => {
+        const a = document.getElementById(`scoreA-${i}`); const b = document.getElementById(`autoB-${i}`);
+        a.addEventListener("input", () => { let v = parseInt(a.value); if (isNaN(v) || v < 0) v = 0; if (v > pointsPerMatch) v = pointsPerMatch; b.textContent = pointsPerMatch - v; });
+      });
+      sub.disabled = false;
+    }
+    function renderAll() { renderPlayers(); renderBoard(); renderRound(); }
 
-    // init
-    renderPlayersList();
-    renderLeaderboard();
-    renderRoundInfo();
+    // ---------- RESET ----------
+    function resetTournament() {
+      const sure = confirm("Er du HELT sikker? Dette sletter alt permanent!");
+      if (!sure) return;
+      localStorage.removeItem("mexicanoState");
+      players = []; roundCounter = 0; currentRound = null; matchHistory = []; nextPlayerId = 1; pointsPerMatch = 24;
+      renderAll(); alert("Turneringen er nullstilt!");
+    }
+
+    // ---------- EVENTS ----------
+    document.getElementById("addPlayerBtn").onclick = addPlayer;
+    document.getElementById("generateRoundBtn").onclick = createRound;
+    document.getElementById("submitScoresBtn").onclick = submitScores;
+    document.getElementById("resetBtn").onclick = resetTournament;
+
+    renderAll();
   </script>
 </body>
 </html>
+
