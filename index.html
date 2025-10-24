@@ -268,7 +268,12 @@
     document.getElementById("generateRoundBtn").onclick = createRound;
     document.getElementById("submitScoresBtn").onclick = submitScores;
     document.getElementById("resetBtn").onclick = resetTournament;
-
+    document.getElementById("playerNameInput").addEventListener("keypress", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        addPlayer();
+      }
+    });
     renderAll();
   </script>
 </body>
